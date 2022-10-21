@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins',sans-serif;
+}
+
+body{
+    background: #e1ecf7;
+    overflow: hidden;
+}
+
+.container{
+    max-width: 450px;
+    padding: 0 20px;
+    margin: 170px auto;
+}
+.login-form{
+    width: 100%;
+    background: #fff;
+    border-radius: 20px;
+}
+.login-form .login-title-box{
+    height: 90px;
+    background: #1557c0;
+    border-radius: 20px 20px 0 0;
+    color: #fff;
+    font-size: 30px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.login-form form{
+    padding: 30px 30px 30px 30px;
+}
+.login-form form .login-input{
+    height: 45px;
+    margin-bottom: 30px;
+    position: relative;
+}
+.login-form form .login-input input{
+    height: 35px;
+    width: 100%;
+    outline: none;
+    padding-left: 15px;
+    border-radius: 10px;
+    border: 1px solid #a19d9d;
+    font-size: 16px;
+}
+
+.login-form form .login-btn button{
+    color: #fff;
+    width: 100%;
+    border-radius: 20px;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 0.6rem;
+    background: #196bde;
+    border: 1px solid #196bde;
+    cursor: pointer;
+}
+
+.login-form form .login-btn button:hover,
+.login-form form .login-btn button:active {
+    background: #13459c;
+    border: 1px solid #13459c;
+}
+
+
+
+
+
+
+
+
+
