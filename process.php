@@ -8,7 +8,7 @@
     if ( $registeredUsername === $username && $registeredPassword === $password) {
         header('Location: homePage.php');
     }else {
-        //header('Location: login.php');
-        echo 'nema vas';
+        header('Location: login.php');
+        echo "NEMA VAS";
     };
  ?>

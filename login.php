@@ -10,7 +10,7 @@
                 <div class="login-title-box">
                     <span>Login Form</span>
                 </div>
-                <form action="process.php" method="post">
+                <form method="post" action="process.php">
                     <div class="login-input">
                         <label> Username </label>
                         <input
@@ -33,7 +33,6 @@
                             Must be 8 or more characters long, contain at least 1 number and 1 special character!
                         </p>
                     </div>
-
                     <div style="margin-top: 80px;" class="login-btn">
                         <button type="submit"> Login </button>
                     </div>
