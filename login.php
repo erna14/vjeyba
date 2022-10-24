@@ -37,8 +37,6 @@
                             name="password"
                             type="password"
                             placeholder="Enter your password"
-                            pattern="(?=.*\d)(?=.*?[~`!@#$%\^&*()\-_=+[\]{};:\x27.,\x22\\|/?><]).{8,}"
-                            required
                         />
                         <p style="color: gray; font-size: 12px; padding-top: 5px;" class="password-rqt-txt">
                             Must be 8 or more characters long, contain at least 1 number and 1 special character!

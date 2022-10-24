@@ -18,6 +18,12 @@
             </a>
         </header>
 
+        <?php
+        if(isset($_GET["welcome_message"])){
+            echo $_GET["welcome_message"];
+        }
+        ?>
+
         <div class="posts">
             <?php
             $userPosts = [
