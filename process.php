@@ -4,6 +4,16 @@
         header('Location: homePage.php');
     }
 
+    // ucitati podatke iz data.php
+
+    // provjeriti kombinaciju username i pw iz post parametra da li se podudara
+
+    // ako je validno, redirekt na homepage i pozdravna poruka
+
+    // osigurati da ako nije post requet, tj. nema post parametara u prvom planu, redirekcija odmah na login
+
+
+
     $username = $_POST["username"];
     $password = $_POST['password'];
 
