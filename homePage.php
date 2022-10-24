@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(!(isset($_SESSION["logedIn"]) && $_SESSION["logedIn"] === true)) {
+        header('Location: login.php');
+    }
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -7,7 +13,7 @@
     <body>
         <header class="nav-bar">
             <h2> HOME PAGE </h2>
-            <a href="login.php">
+            <a href="logOutProcess.php">
                 <button class="logout-btn"> Logout </button>
             </a>
         </header>
