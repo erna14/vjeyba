@@ -3,6 +3,8 @@
     if(isset($_SESSION["logedIn"]) && $_SESSION["logedIn"] === true) {
         header('Location: homePage.php');
     }
+
+    
     //require('include/data.php');
 
     $dataBaseConn = mysqli_connect("localhost", "Erna", "password1*", "users_db");
