@@ -3,6 +3,7 @@
     if(isset($_SESSION["logedIn"]) && $_SESSION["logedIn"] === true) {
         header('Location: homePage.php');
     }
+    //require('include/data.php');
 
     include 'include/DataBaseConnection.php';
 
