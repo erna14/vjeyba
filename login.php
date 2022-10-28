@@ -38,12 +38,14 @@
                             type="password"
                             placeholder="Enter your password"
                         />
-                        <p style="color: gray; font-size: 12px; padding-top: 5px;" class="password-rqt-txt">
-                            Must be 8 or more characters long, contain at least 1 number and 1 special character!
-                        </p>
                     </div>
-                    <div style="margin-top: 80px;" class="login-btn">
+                    <div style="margin-top: 40px;" class="login-btn">
                         <button type="submit"> Login </button>
+                    </div>
+                    <div class="signup-option">
+                        <span>
+                            Not a member? <a href="signUp.php"> Sign Up </a>
+                        </span>
                     </div>
                 </form>
             </div>

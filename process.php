@@ -44,6 +44,7 @@
     for ( $i = 0; $i < $registeredUsersArrayLength; $i++) {
         if (($username === $registeredUsers[$i]["username"]) && ($password === $registeredUsers[$i]["password"])) {
             $_SESSION["logedIn"] = true;
+            $_SESSION["username"] = $username;
             header('Location: homePage.php?welcome_message=Welcome '.$username);
             return;
         }

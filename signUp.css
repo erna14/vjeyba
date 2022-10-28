@@ -17,12 +17,12 @@ body{
     padding: 0 20px;
     margin: 170px auto;
 }
-.login-form{
+.signup-form{
     width: 100%;
     background: #fff;
     border-radius: 20px;
 }
-.login-form .login-title-box{
+.signup-form .signup-title-box{
     height: 90px;
     background: #1557c0;
     border-radius: 20px 20px 0 0;
@@ -33,15 +33,15 @@ body{
     align-items: center;
     justify-content: center;
 }
-.login-form form{
+.signup-form form{
     padding: 30px 30px 30px 30px;
 }
-.login-form form .login-input{
+.signup-form form .signup-input{
     height: 45px;
     margin-bottom: 30px;
     position: relative;
 }
-.login-form form .login-input input{
+.signup-form form .signup-input input{
     height: 35px;
     width: 100%;
     outline: none;
@@ -51,7 +51,7 @@ body{
     font-size: 16px;
 }
 
-.login-form form .login-btn button{
+.signup-form form .signup-btn button{
     color: #fff;
     width: 100%;
     border-radius: 20px;
@@ -63,20 +63,29 @@ body{
     cursor: pointer;
 }
 
-.login-form form .login-btn button:hover,
-.login-form form .login-btn button:active {
+.signup-form form .signup-btn button:hover,
+.signup-form form .signup-btn button:active {
     background: #13459c;
     border: 1px solid #13459c;
 }
 
-.login-form form .signup-option {
+.signup-form form .login-option {
     color: grey;
     font-size: 14px;
     text-align: center;
     padding-top: 20px;
 }
 
-.login-form form .signup-option a {
+.signup-form form .login-option a {
     color: #13459c;
     text-decoration: none;
 }
+
+
+
+
+
+
+
+
+
