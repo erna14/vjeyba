@@ -11,8 +11,6 @@
     $sql = "INSERT INTO tbl_users VALUES ('0', '$username','$password')";
     $result = mysqli_query($dataBaseConn, $sql);
 
-
-
     if ( $result ){
         header("Location: homePage.php");
     } else {

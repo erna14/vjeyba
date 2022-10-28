@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="signUp.css" rel="stylesheet">
+        <link href="css/signUp.css" rel="stylesheet">
         <title> Sign Up </title>
     </head>
     <body>
@@ -12,7 +12,8 @@
                 <div class="signup-title-box">
                     <span> Sign Up Form</span>
                 </div>
-                <form action="include/usersDataBase.php" method="post">
+                <form action="process.php" method="post">
+                    <input type="hidden" name="path" value="signup">
                     <div class="signup-input">
                         <label> Username </label>
                         <input

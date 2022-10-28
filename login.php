@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link href="login.css" rel="stylesheet">
+        <link href="css/login.css" rel="stylesheet">
         <title> Login </title>
     </head>
     <body>
@@ -22,6 +22,7 @@
                     <span>Login Form</span>
                 </div>
                 <form method="post" action="process.php">
+                    <input type="hidden" name="path" value="login">
                     <div class="login-input">
                         <label> Username </label>
                         <input
