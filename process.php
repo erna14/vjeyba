@@ -3,33 +3,49 @@
     if(isset($_SESSION["logedIn"]) && $_SESSION["logedIn"] === true) {
         header('Location: homePage.php');
     }
-    //require('include/data.php');
 
-    include 'include/DataBaseConnection.php';
+    require ('include/DataBaseConnection.php');
+    require('include/User.php');
 
     $username = $_POST["username"];
     $password = $_POST["password"];
+
     $pathName = $_POST["path"];
 
-    $userObj = new DataBaseConnection($username,$password);
+    $saltLength = 6;
 
-    //$userObj->setDataBaseConn(mysqli_connect("localhost", "Erna", "password1*", "users_db"));
+    function saltGenerator($saltLength) {
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        $salt = '';
 
-    //if (!isset($username) || !isset($password)) {
-        //header('Location: login.php');
-        //return;
-    //}
+        for ($i = 0; $i < $saltLength; $i++) {
+            $index = rand(0, strlen($characters) - 1);
+            $salt .= $characters[$index];
+        }
+        return $salt;
+    }
+
+    $userObj = new User($username,$password);
 
     $userObj->connectivityCheck();
 
     if ($pathName === "signup") {
         //SIGNUP PROCESS
-            $userObj->passwordLengthChecker();
-            $userObj->passwordNumSpecCharChecker();
-            $userObj->signUpProcess();
+        if (!isset($username) || !isset($password)) {
+            header('Location: signUp.php');
+            return;
+        }
+
+        $userObj->passwordLengthChecker();
+        $userObj->passwordNumSpecCharChecker();
+        $userObj->signUpProcess();
 
     } elseif ($pathName === "login") {
         //LOGIN PROCESS
+        if (!isset($username) || !isset($password)) {
+            header('Location: login.php');
+            return;
+        }
         $userObj->passwordLengthChecker();
         $userObj->logInProcess();
 
