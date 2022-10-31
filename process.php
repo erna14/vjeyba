@@ -23,7 +23,7 @@
             return;
         }
         //USERNAME CHECKER
-        $userObj->usernameChecker();
+        $userObj->usernameChecker($pathName);
 
         //PASSWORD CHECKER
         $userObj->passwordLengthChecker();
@@ -36,7 +36,12 @@
         $userObj->signUpProcess();
 
     } elseif ($pathName === "login") {
-
+        //LOGIN PROCESS
+        if (!isset($username) || !isset($password)) {
+            header('Location: signUp.php');
+            return;
+        }
+        $userObj->usernameChecker($pathName);
         $userObj->passwordLengthChecker();
         $userObj->logInProcess();
     }

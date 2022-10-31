@@ -52,14 +52,20 @@ class User extends DataBaseConnection {
         $this->salt = $salt;
     }
 
-    public function usernameChecker() {
+    public function usernameChecker($path) {
         $username = $this->getUsername();
         $dataBase = $this->getDataBaseConn();
         $db_username = "SELECT * FROM tbl_users WHERE username='$username'";
         $find_db_username = mysqli_query($dataBase, $db_username);
         if(mysqli_num_rows($find_db_username) > 0){
-            header('Location: signUp.php?error=This username is already taken!');
-            return;
+            if ($path === 'signup') {
+                header('Location: signUp.php?error=This username is already taken!');
+                return;
+            } elseif ($path === 'login') {
+                header('Location: login.php?error=Something went wrong!');
+                return;
+            }
+
         }
     }
 
