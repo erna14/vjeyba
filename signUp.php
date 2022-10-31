@@ -1,4 +1,9 @@
-
+<?php
+    session_start();
+    if(isset($_SESSION["logedIn"]) && $_SESSION["logedIn"] === true) {
+        header('Location: homePage.php');
+    }
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,7 +11,11 @@
         <title> Sign Up </title>
     </head>
     <body>
-
+        <?php
+            if(isset($_GET["error"])){
+                echo $_GET["error"];
+            }
+        ?>
         <div class="container">
             <div class="signup-form">
                 <div class="signup-title-box">

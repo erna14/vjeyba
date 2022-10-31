@@ -60,12 +60,10 @@ class User extends DataBaseConnection {
         if(mysqli_num_rows($find_db_username) > 0){
             if ($path === 'signup') {
                 header('Location: signUp.php?error=This username is already taken!');
-                return;
             } elseif ($path === 'login') {
                 header('Location: login.php?error=Something went wrong!');
-                return;
             }
-
+            return;
         }
     }
 

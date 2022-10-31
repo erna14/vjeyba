@@ -38,10 +38,10 @@
     } elseif ($pathName === "login") {
         //LOGIN PROCESS
         if (!isset($username) || !isset($password)) {
-            header('Location: signUp.php');
+            header('Location: login.php');
             return;
         }
-        $userObj->usernameChecker($pathName);
+        //$userObj->usernameChecker($pathName);
         $userObj->passwordLengthChecker();
         $userObj->logInProcess();
     }
