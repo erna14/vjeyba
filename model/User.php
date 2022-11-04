@@ -2,27 +2,60 @@
 
 declare(strict_types=1);
 
-
 class User implements UserI
 {
+    private int $ID;
+    private string $username;
+    private string $password;
+    private string $salt;
 
-    function getID(): int
+    public function __construct($username, $password, $salt)
     {
-        // TODO: Implement getID() method.
+        $this->username = $username;
+        $this->password = $password;
+        $this->salt = $salt;
     }
 
-    function getUsername(): string
+    public function getID():int
     {
-        // TODO: Implement getUsername() method.
+        return $this->ID;
+    }
+    public function setID($ID)
+    {
+        $this->ID = $ID;
     }
 
-    function getPassword(): string
+
+    public function getUsername():string
     {
-        // TODO: Implement getPassword() method.
+        return $this->username;
+    }
+    public function setUsername($username)
+    {
+        $this->username = $username;
     }
 
-    function getSalt(): string
+
+    public function getPassword():string
     {
-        // TODO: Implement getSalt() method.
+        return $this->password;
     }
+    public function setPassword($password)
+    {
+        $this->password = $password;
+    }
+
+
+    public function getSalt():string
+    {
+        return $this->salt;
+    }
+    public function setSalt(string $salt)
+    {
+        $this->salt = $salt;
+    }
+
+
+
+
 }

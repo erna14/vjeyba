@@ -1,6 +1,5 @@
 <?php
 
-
 interface UserI
 {
     function getID(): int;
