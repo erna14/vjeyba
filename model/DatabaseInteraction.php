@@ -2,28 +2,22 @@
 
 class DatabaseInteraction implements DatabaseI
 {
-    private $dataBase;
+    private mysqli $dataBase;
+    private ?string $connectionError = null;
 
-    public function __construct($dataBase)
+    public function __construct()
     {
-        $this->dataBase = $dataBase;
-    }
-    public function getDataBase()
-    {
-        return $this->dataBase;
-    }
-    public function setDataBase($dataBase): void
-    {
-        $this->dataBase = $dataBase;
     }
 
     function connect(): void
     {
-        // TODO: Implement connect() method.
-        $this->setDataBase(mysqli_connect("localhost", "Erna", "password1*", "users_db"));
-
-        if ($this->hasValidConnection() === false) {
-            echo $this->getConnectionError();
+        $status = mysqli_connect("localhost", "Erna", "password1*", "users_db");
+        if ($status === false) {
+            // bila je neka greska
+            $this->connectionError = mysqli_connect_error();
+        } else {
+            $this->connectionError = null;
+            $this->dataBase = $status;
         }
     }
 
@@ -35,8 +29,9 @@ class DatabaseInteraction implements DatabaseI
 
     function hasValidConnection(): bool
     {
+        return $this->connectionError === null;
         // TODO: Implement hasValidConnection() method.
-        if(!$this->getDataBase()) {
+        if (!$this->getDataBase()) {
             return false;
         } else {
             return true;
@@ -50,17 +45,10 @@ class DatabaseInteraction implements DatabaseI
         return $errorMessage;
     }
 
-    function prepareSQL(string $sql): string
-    {
-        // TODO: Implement prepareSQL() method.
-        $stmt = mysqli_prepare($sql,$this->query());
-        return $stmt;
-    }
 
     function query(string $sql): mysqli_result|string
     {
-        // TODO: Implement query() method.
-        $prepared = $this->prepareSQL($sql);
+        $prepared = mysqli_prepare($this->dataBase, $sql);
         return mysqli_query($prepared);
     }
 }

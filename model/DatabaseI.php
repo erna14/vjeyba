@@ -28,13 +28,6 @@ interface DatabaseI
     function getConnectionError(): string|null;
 
     /**
-     * Radi pripremanje sirovog SQL-a kako bi izbjegli SQL Injection napad.
-     * @param string $sql
-     * @return string
-     */
-    function prepareSQL(string $sql): string;
-
-    /**
      * Izvrsava Query i vraca rezultat. Ako je doslo do greske prilikom izvrsavanja query-a, vraca tekstualnu gresku
      *
      * @param string $sql
