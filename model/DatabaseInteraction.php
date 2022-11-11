@@ -5,10 +5,6 @@ class DatabaseInteraction implements DatabaseI
     private mysqli $dataBase;
     private ?string $connectionError = null;
 
-    public function __construct()
-    {
-    }
-
     function connect(): void
     {
         $status = mysqli_connect("localhost", "Erna", "password1*", "users_db");
@@ -23,14 +19,13 @@ class DatabaseInteraction implements DatabaseI
 
     function disconnect(): void
     {
-        // TODO: Implement disconnect() method.
-        mysqli_close($this->getDataBase());
+        mysqli_close($this->dataBase);
     }
 
     function hasValidConnection(): bool
     {
         return $this->connectionError === null;
-        // TODO: Implement hasValidConnection() method.
+
         if (!$this->getDataBase()) {
             return false;
         } else {
@@ -40,7 +35,6 @@ class DatabaseInteraction implements DatabaseI
 
     function getConnectionError(): string|null
     {
-        // TODO: Implement getConnectionError() method.
         $errorMessage = 'SOMETHING WENT WRONG: ' . mysqli_connect_error();
         return $errorMessage;
     }
@@ -49,6 +43,7 @@ class DatabaseInteraction implements DatabaseI
     function query(string $sql): mysqli_result|string
     {
         $prepared = mysqli_prepare($this->dataBase, $sql);
-        return mysqli_query($prepared);
+        $prepared->execute();
+        return $prepared->get_result();
     }
 }

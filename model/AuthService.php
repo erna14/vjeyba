@@ -15,11 +15,9 @@ class AuthService implements AuthServiceI
     {
         // TODO: Implement isUsernameTaken() method.
         $isTaken = false;
-        $username = $this->user->getUsername();
-        $dataBase = $this->db->getDataBase();
         $db_username = $this->db->query("SELECT * FROM tbl_users WHERE username='$username'");
-        $find_db_username = mysqli_query($dataBase, $db_username);
-        if (mysqli_num_rows($find_db_username) > 0) {
+
+        if ($db_username->num_rows > 0) {
             $isTaken = true;
         }
 
@@ -33,7 +31,7 @@ class AuthService implements AuthServiceI
 
         //Length checker
         $isPasswordLengthValid = false;
-        if (strlen($this->$password) >= 8) {
+        if (strlen($password) >= 8) {
             $isPasswordLengthValid = true;
         }
 
@@ -56,7 +54,6 @@ class AuthService implements AuthServiceI
 
     private function generateSalt(): string
     {
-        // TODO: Implement generateSalt() method.
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $saltLength = 6;
         $salt = '';
@@ -68,9 +65,28 @@ class AuthService implements AuthServiceI
         return $salt;
     }
 
-    public function loginUser(string $username, string $password): UserI
+    public function loginUser(string $username, string $password): UserI|string
     {
-        // TODO: Implement loginUser() method.
+        $isPasswordValid = $this->isPasswordValid($password);
+        if (!$isPasswordValid) {
+            return "ERR_PASSWORD_IS_NOT_VALID";
+        }
+
+        $findUser = $this->db->query("SELECT * FROM tbl_users WHERE username = '$username'");
+
+        if(is_string($findUser)) {
+            return "CAN_NOT_FIND_USER";
+        }
+
+        if ($findUser->num_rows > 0) {
+            while ($row = mysqli_fetch_assoc($findUser)) {
+                $hashedPassword = md5($password . $row["salt"]);
+
+                if ($hashedPassword === $row["passoword"]) {
+                    return new User($row["username"],$row["passoword"],$row["salt"]);
+                }
+            }
+        }
 
     }
 
@@ -92,8 +108,8 @@ class AuthService implements AuthServiceI
 
         $status = $this->db->query("INSERT INTO tbl_users (username, passoword, salt) VALUES ('$username', '$hashedPassword', '$salt')");
 
-        if (false === $status) {
-            // nesto nije uspjelo u insertovanju u bazu podataka...
+        if (is_string($status)) {
+            return "INPUT_ERROR";
         }
 
         $user = new User($username, $hashedPassword, $salt);
@@ -104,7 +120,6 @@ class AuthService implements AuthServiceI
 
     public function logoutUser(): void
     {
-        // TODO: Implement logoutUser() method.
         session_start();
         session_unset();
         session_destroy();

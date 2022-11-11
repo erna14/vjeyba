@@ -4,29 +4,25 @@
         header('Location: homePage.php');
     }
 
-    require('include/DataBaseConnection.php');
-    require('include/User.php');
-
+    include('model/DatabaseI.php');
+    include('model/DatabaseInteraction.php');
+    include ('model/UserI.php');
+    include("model/User.php");
+    include('model/AuthServiceI.php');
+    include('model/AuthService.php');
 
     $db = new DatabaseInteraction();
     $db->connect();
-    if (!$db->hasValidConnection()){
-        // vrati nazad sa porukom da postoji sistemska greska uz dodatnu poruku izvucenu iz $db->getConnectionError()
-    }
 
+    if (!$db->hasValidConnection()){
+        echo $db->getConnectionError();
+    }
 
     $authService = new AuthService($db);
 
-
-
     $username = $_POST["username"];
     $password = $_POST["password"];
-
     $pathName = $_POST["path"];
-
-    $userObj = new User($username,$password);
-
-    $userObj->connectivityCheck();
 
     if ($pathName === "signup") {
         //SIGNUP PROCESS
@@ -35,24 +31,14 @@
             return;
         }
 
-        $result = $authService->singUpUser($username, $password);
-        if (is_string($result)){
-            // desila se neka greska?? - vrati ga nazad negdje
+        $signUp_result = $authService->singUpUser($username, $password);
+        if (is_string($signUp_result)){
+
+            header('Location: signUp.php');
+            return;
         }
 
-        $_SESSION["user_id"] = $result->getID();
-        //USERNAME CHECKER
-        $userObj->usernameChecker($pathName);
-
-        //PASSWORD CHECKER
-        $userObj->passwordLengthChecker();
-        $userObj->passwordNumSpecCharChecker();
-
-        //HASH AND SALT
-        $userObj->saltGenerator();
-        $userObj->hashPassword();
-
-        $userObj->signUpProcess();
+        header("Location: homePage.php?welcome_message=Welcome ". $username);
 
     } elseif ($pathName === "login") {
         //LOGIN PROCESS
@@ -60,14 +46,21 @@
             header('Location: login.php');
             return;
         }
-        //$userObj->usernameChecker($pathName);
-        $userObj->passwordLengthChecker();
-        $userObj->logInProcess();
+
+        $login_result = $authService->loginUser($username, $password);
+
+        if(is_string($login_result)) {
+            header('Location: login.php');
+            return;
+        }
+        $_SESSION["logedIn"] = true;
+        header("Location: homePage.php?welcome_message=Welcome ". $username);
+
+    } elseif ($pathName === "logout") {
+        $authService->logoutUser();
+        header('Location: login.php');
     }
 
-    //header('Location: login.php?error=nema vas');
 
-    $userObj->dataBaseDeconnect();
+    $db->disconnect();
 
-
- ?>
